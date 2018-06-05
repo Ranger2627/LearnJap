@@ -12,6 +12,8 @@
 #define Main_Width [UIScreen mainScreen].bounds.size.width
 #define Main_Height [UIScreen mainScreen].bounds.size.height
 
+#define NavHeight [UIApplication sharedApplication].statusBarFrame.size.height + 44
+#define isIphoneX [UIApplication sharedApplication].statusBarFrame.size.height > 20 ? YES : NO
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 

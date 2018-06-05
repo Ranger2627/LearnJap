@@ -14,6 +14,12 @@
 		1841522720BBF32E00D52A29 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1841522520BBF32E00D52A29 /* LaunchScreen.storyboard */; };
 		1841522A20BBF32E00D52A29 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1841522920BBF32E00D52A29 /* main.m */; };
 		1841523320BBF3BD00D52A29 /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1841523220BBF3BD00D52A29 /* StartViewController.m */; };
+		186B79DD20BD31F3002CC110 /* ReminderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 186B79DC20BD31F3002CC110 /* ReminderViewController.m */; };
+		18BB3CA020BFE8FB00A4F0E8 /* ReminderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BB3C9E20BFE8FB00A4F0E8 /* ReminderTableViewCell.m */; };
+		18BB3CA120BFE8FB00A4F0E8 /* ReminderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18BB3C9F20BFE8FB00A4F0E8 /* ReminderTableViewCell.xib */; };
+		18BB3CA520BFF86F00A4F0E8 /* CusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BB3CA420BFF86F00A4F0E8 /* CusViewController.m */; };
+		18E796B120C52B4600902982 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E796AF20C52B4600902982 /* AboutViewController.m */; };
+		18E796B220C52B4600902982 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18E796B020C52B4600902982 /* AboutViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +36,16 @@
 		1841523120BBF3BD00D52A29 /* StartViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartViewController.h; sourceTree = "<group>"; };
 		1841523220BBF3BD00D52A29 /* StartViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StartViewController.m; sourceTree = "<group>"; };
 		1841523620BBF5CD00D52A29 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		186B79DB20BD31F3002CC110 /* ReminderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReminderViewController.h; sourceTree = "<group>"; };
+		186B79DC20BD31F3002CC110 /* ReminderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReminderViewController.m; sourceTree = "<group>"; };
+		18BB3C9D20BFE8FB00A4F0E8 /* ReminderTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReminderTableViewCell.h; sourceTree = "<group>"; };
+		18BB3C9E20BFE8FB00A4F0E8 /* ReminderTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReminderTableViewCell.m; sourceTree = "<group>"; };
+		18BB3C9F20BFE8FB00A4F0E8 /* ReminderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReminderTableViewCell.xib; sourceTree = "<group>"; };
+		18BB3CA320BFF86F00A4F0E8 /* CusViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CusViewController.h; sourceTree = "<group>"; };
+		18BB3CA420BFF86F00A4F0E8 /* CusViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CusViewController.m; sourceTree = "<group>"; };
+		18E796AE20C52B4600902982 /* AboutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		18E796AF20C52B4600902982 /* AboutViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		18E796B020C52B4600902982 /* AboutViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,7 +83,10 @@
 				1841521B20BBF32D00D52A29 /* AppDelegate.m */,
 				1841521D20BBF32D00D52A29 /* ViewController.h */,
 				1841521E20BBF32D00D52A29 /* ViewController.m */,
+				18E796AA20C5234D00902982 /* AboutPage(关于App) */,
+				18BB3CA220BFF84700A4F0E8 /* CusPage(自定选择页面) */,
 				1841522820BBF32E00D52A29 /* Info.plist */,
+				186B79DA20BD31CF002CC110 /* WordBook(单词本) */,
 				1841523520BBF5C500D52A29 /* define */,
 				1841523420BBF5B600D52A29 /* sys */,
 				1841523020BBF39D00D52A29 /* StartTest(开始测验) */,
@@ -100,6 +119,45 @@
 				1841523620BBF5CD00D52A29 /* PrefixHeader.pch */,
 			);
 			path = define;
+			sourceTree = "<group>";
+		};
+		186B79DA20BD31CF002CC110 /* WordBook(单词本) */ = {
+			isa = PBXGroup;
+			children = (
+				186B79DB20BD31F3002CC110 /* ReminderViewController.h */,
+				186B79DC20BD31F3002CC110 /* ReminderViewController.m */,
+				18BB3C9C20BFE8E600A4F0E8 /* cell */,
+			);
+			path = "WordBook(单词本)";
+			sourceTree = "<group>";
+		};
+		18BB3C9C20BFE8E600A4F0E8 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				18BB3C9D20BFE8FB00A4F0E8 /* ReminderTableViewCell.h */,
+				18BB3C9E20BFE8FB00A4F0E8 /* ReminderTableViewCell.m */,
+				18BB3C9F20BFE8FB00A4F0E8 /* ReminderTableViewCell.xib */,
+			);
+			path = cell;
+			sourceTree = "<group>";
+		};
+		18BB3CA220BFF84700A4F0E8 /* CusPage(自定选择页面) */ = {
+			isa = PBXGroup;
+			children = (
+				18BB3CA320BFF86F00A4F0E8 /* CusViewController.h */,
+				18BB3CA420BFF86F00A4F0E8 /* CusViewController.m */,
+			);
+			path = "CusPage(自定选择页面)";
+			sourceTree = "<group>";
+		};
+		18E796AA20C5234D00902982 /* AboutPage(关于App) */ = {
+			isa = PBXGroup;
+			children = (
+				18E796AE20C52B4600902982 /* AboutViewController.h */,
+				18E796AF20C52B4600902982 /* AboutViewController.m */,
+				18E796B020C52B4600902982 /* AboutViewController.xib */,
+			);
+			path = "AboutPage(关于App)";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -162,6 +220,8 @@
 				1841522720BBF32E00D52A29 /* LaunchScreen.storyboard in Resources */,
 				1841522420BBF32E00D52A29 /* Assets.xcassets in Resources */,
 				1841522220BBF32D00D52A29 /* Main.storyboard in Resources */,
+				18BB3CA120BFE8FB00A4F0E8 /* ReminderTableViewCell.xib in Resources */,
+				18E796B220C52B4600902982 /* AboutViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,9 +233,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				1841521F20BBF32D00D52A29 /* ViewController.m in Sources */,
+				18BB3CA520BFF86F00A4F0E8 /* CusViewController.m in Sources */,
+				18E796B120C52B4600902982 /* AboutViewController.m in Sources */,
 				1841523320BBF3BD00D52A29 /* StartViewController.m in Sources */,
 				1841522A20BBF32E00D52A29 /* main.m in Sources */,
+				18BB3CA020BFE8FB00A4F0E8 /* ReminderTableViewCell.m in Sources */,
 				1841521C20BBF32D00D52A29 /* AppDelegate.m in Sources */,
+				186B79DD20BD31F3002CC110 /* ReminderViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,16 +380,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = C4YSB2AYP2;
+				DEVELOPMENT_TEAM = GS9E29E926;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/FiftyTest/define/PrefixHeader.pch";
 				INFOPLIST_FILE = FiftyTest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Jack.FiftyTest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Jack.FiftyTestInRose;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -334,16 +399,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = C4YSB2AYP2;
+				DEVELOPMENT_TEAM = GS9E29E926;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/FiftyTest/define/PrefixHeader.pch";
 				INFOPLIST_FILE = FiftyTest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Jack.FiftyTest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Jack.FiftyTestInRose;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
