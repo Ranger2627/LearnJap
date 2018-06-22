@@ -2,7 +2,7 @@
 //  ReminderViewController.m
 //  FiftyTest
 //
-//  Created by Wuxinglin on 2018/5/29.
+//  Created by Jack on 2018/5/29.
 //  Copyright © 2018年 DS. All rights reserved.
 //
 
@@ -17,6 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"单词本";
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.jackTableView];
     

@@ -2,7 +2,7 @@
 //  AboutViewController.m
 //  FiftyTest
 //
-//  Created by Wuxinglin on 2018/6/4.
+//  Created by Jack on 2018/6/4.
 //  Copyright © 2018年 DS. All rights reserved.
 //
 
@@ -28,7 +28,7 @@
     //版本信息
     NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
     NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
-    self.infoLabel.text = [NSString stringWithFormat:@"熟练记忆五十音写法的辅助App\n\n版本号：%@",app_Version];
+    self.infoLabel.text = [NSString stringWithFormat:@"熟练记忆五十音写法的辅助App\n\n版本号：%@\n\n感谢参与测试的小朋友",app_Version];
     
     [self.backButton addTarget:self action:@selector(backAction) forControlEvents:(UIControlEventTouchUpInside)];
 }

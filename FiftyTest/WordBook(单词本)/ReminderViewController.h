@@ -2,7 +2,7 @@
 //  ReminderViewController.h
 //  FiftyTest
 //
-//  Created by Wuxinglin on 2018/5/29.
+//  Created by Jack on 2018/5/29.
 //  Copyright © 2018年 DS. All rights reserved.
 //
 

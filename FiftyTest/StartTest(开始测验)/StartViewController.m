@@ -2,7 +2,7 @@
 //  StartViewController.m
 //  FiftyTest
 //
-//  Created by Wuxinglin on 2018/5/28.
+//  Created by Jack on 2018/5/28.
 //  Copyright © 2018年 DS. All rights reserved.
 //
 
@@ -21,6 +21,9 @@
 @property(copy,nonatomic)NSString *lastString;          //翻牌时记录现在显示哪个
 @property(strong,nonatomic)NSMutableArray *forgetArray; //忘记词汇数组
 @property(assign,nonatomic)BOOL didForget;    //点击下一个按钮是否提示忘记
+@property(strong,nonatomic)UIView *showInfoView;        //写在小本本上
+@property(strong,nonatomic)UILabel *infoLabel;
+@property(strong,nonatomic)UIView *tapTipView;          //第一次打开时候的帮助
 @end
 
 @implementation StartViewController
@@ -33,6 +36,7 @@
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     }
     [self.view addSubview:self.mainLabel];
+    [self.view addSubview:self.showInfoView];
     [self.view addSubview:self.progressLabel];
     //创建数据源
     [self creatData];
@@ -59,6 +63,18 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = YES;
+    /*
+     第一次打开时候弹出提示，点击提示消失+反转卡片
+     以后不再显示
+     */
+    if (![[NSUserDefaults standardUserDefaults]objectForKey:@"FirstLuanch"]) {
+        [self.mainLabel addSubview:self.tapTipView];
+        [UIView animateWithDuration:1 animations:^{
+            self.tapTipView.alpha = 0.5;
+        }];
+        [[NSUserDefaults standardUserDefaults] setObject:@"NotFirst" forKey:@"FirstLuanch"];
+    }
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -118,6 +134,42 @@
     return _mainLabel;
 }
 
+-(UIView*)tapTipView{
+    if (!_tapTipView) {
+        _tapTipView = [[UIView alloc]initWithFrame:self.mainLabel.bounds];
+        _tapTipView.backgroundColor = [UIColor blackColor];
+        _tapTipView.alpha = 0;
+        _tapTipView.userInteractionEnabled = YES;
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tipTouchAction)];
+        [_tapTipView addGestureRecognizer:tap];
+        
+        CGFloat padHeight = 50;
+        if (Main_Height < 667.0) {
+            //低分辨率iPad
+            padHeight = 40;
+        }
+        UILabel *tipInfoLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, _tapTipView.frame.origin.y+_tapTipView.frame.size.height-padHeight, Main_Width, 20)];
+        
+        tipInfoLabel.textAlignment = NSTextAlignmentCenter;
+        tipInfoLabel.textColor = [UIColor whiteColor];
+        tipInfoLabel.text = @"可点击查看答案";
+        tipInfoLabel.font = [UIFont systemFontOfSize:20 weight:15];
+        [_tapTipView addSubview:tipInfoLabel];
+        
+    }
+    return _tapTipView;
+}
+
+-(void)tipTouchAction{
+    [UIView animateWithDuration:0.4 animations:^{
+        self.tapTipView.alpha = 0;
+    } completion:^(BOOL finished) {
+        [self.tapTipView removeFromSuperview];
+        [self switchCardAction];
+    }];
+}
+
 -(UILabel*)progressLabel{
     if (!_progressLabel) {
         _progressLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, Main_Width+5, Main_Width, 30)];
@@ -127,6 +179,56 @@
         
     }
     return _progressLabel;
+}
+
+-(UIView*)showInfoView{
+    if (!_showInfoView) {
+        _showInfoView = [[UIView alloc]initWithFrame:CGRectMake(0, self.progressLabel.frame.origin.y+self.progressLabel.frame.size.height, Main_Width, Main_Height-(self.progressLabel.frame.origin.y+self.progressLabel.frame.size.height))];
+        _showInfoView.userInteractionEnabled = YES;
+        
+        UIPanGestureRecognizer *tap = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(showInfoAction:)];
+        [_showInfoView addGestureRecognizer:tap];
+        
+        //提示信息
+        CGFloat padHeight = 30.0*Main_Width/375;
+        if (Main_Height < 667.0) {
+            //低分辨率iPad
+            padHeight = -10;
+        }
+        self.infoLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, padHeight, Main_Width, 100)];
+        self.infoLabel.text = @"把答案写在小本本上吧";
+        self.infoLabel.textAlignment = NSTextAlignmentCenter;
+        self.infoLabel.font = [UIFont systemFontOfSize:30];
+        self.infoLabel.alpha = 0;
+        
+        [_showInfoView addSubview:self.infoLabel];
+        
+    }
+    return _showInfoView;
+}
+
+#pragma mark - 自认为能写字时候慢慢弹出的提示
+-(void)showInfoAction:(UIPanGestureRecognizer*)tap{
+    //滑动结束时候执行动作
+    if (tap.state == UIGestureRecognizerStateEnded) {
+        tap.view.userInteractionEnabled = NO;
+        if (self.infoLabel.alpha == 0) {
+            //慢慢出现
+            [UIView animateWithDuration:.5 animations:^{
+                self.infoLabel.alpha = 1;
+            } completion:^(BOOL finished) {
+                tap.view.userInteractionEnabled = YES;
+            }];
+        }else{
+            //慢慢消失
+            [UIView animateWithDuration:0.3 animations:^{
+                self.infoLabel.alpha = 0;
+            } completion:^(BOOL finished) {
+                tap.view.userInteractionEnabled = YES;
+            }];
+        }
+    }
+    
 }
 
 #pragma mark - 卡片翻转
@@ -272,7 +374,7 @@
     ///////////结束动画效果
     
     //展示进度
-    self.progressLabel.text = [NSString stringWithFormat:@"%ld/%ld",(self.remainNumber),(long)self.maxNumber];
+    self.progressLabel.text = [NSString stringWithFormat:@"%ld/%ld",(long)(self.remainNumber),(long)self.maxNumber];
     
     if (self.remainNumber == self.maxNumber) {
         [self.nextButton setTitle:@"结束" forState:(UIControlStateNormal)];

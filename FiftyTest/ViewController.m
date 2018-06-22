@@ -2,7 +2,7 @@
 //  ViewController.m
 //  FiftyTest
 //
-//  Created by Wuxinglin on 2018/5/28.
+//  Created by Jack on 2018/5/28.
 //  Copyright © 2018年 DS. All rights reserved.
 //
 
@@ -20,9 +20,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    /*
+     Devices -
+             - iPhone     -> 在iPad上也可以运行，右下角有1x，2x可选
+             - iPad
+             - universual -> 运行在iPad上是正常效果，但是UI布局需要重新处理
+     */
     
     //infoButton
-    UIButton *infoButton = [[UIButton alloc]initWithFrame:CGRectMake(30, 80, Main_Width-60, (Main_Width-80)*Main_Width/375)];
+    UIButton *infoButton = [[UIButton alloc]initWithFrame:CGRectMake(30, 80, (Main_Width-60)*Main_Width/375, (Main_Width-80)*Main_Width/375)];
     infoButton.backgroundColor = [UIColor lightGrayColor];
     [infoButton setImage:[UIImage imageNamed:@"icon1024"] forState:(UIControlStateNormal)];
     [infoButton addTarget:self action:@selector(infoPageAction) forControlEvents:(UIControlEventTouchUpInside)];
