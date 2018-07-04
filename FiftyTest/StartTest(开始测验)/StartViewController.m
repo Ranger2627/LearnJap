@@ -144,12 +144,7 @@
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tipTouchAction)];
         [_tapTipView addGestureRecognizer:tap];
         
-        CGFloat padHeight = 50;
-        if (Main_Height < 667.0) {
-            //低分辨率iPad
-            padHeight = 40;
-        }
-        UILabel *tipInfoLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, _tapTipView.frame.origin.y+_tapTipView.frame.size.height-padHeight, Main_Width, 20)];
+        UILabel *tipInfoLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, _tapTipView.frame.origin.y+_tapTipView.frame.size.height-50, Main_Width, 20)];
         
         tipInfoLabel.textAlignment = NSTextAlignmentCenter;
         tipInfoLabel.textColor = [UIColor whiteColor];
@@ -190,7 +185,7 @@
         [_showInfoView addGestureRecognizer:tap];
         
         //提示信息
-        CGFloat padHeight = 30.0*Main_Width/375;
+        CGFloat padHeight = 30.0*(screenScale);
         if (Main_Height < 667.0) {
             //低分辨率iPad
             padHeight = -10;
@@ -278,10 +273,10 @@
                         @"ん"];
     NSArray *allEng = @[@"a",@"i",@"u",@"e",@"o",
                         @"ka",@"ki",@"ku",@"ke",@"ko",
-                        @"sa",@"si",@"su",@"se",@"so",
+                        @"sa",@"shi",@"su",@"se",@"so",
                         @"ta",@"chi",@"tsu",@"te",@"to",
                         @"na",@"ni",@"nu",@"ne",@"no",
-                        @"ha",@"hi",@"hu",@"he",@"ho",
+                        @"ha",@"hi",@"fu",@"he",@"ho",
                         @"ma",@"mi",@"mu",@"me",@"mo",
                         @"ya",@"yu",@"yo",
                         @"ra",@"ri",@"ru",@"re",@"ro",
@@ -303,20 +298,39 @@
 
 #pragma mark - 下一页按钮动作
 -(void)showInfomationForlabel{
+    /*
+     --判断是否为最后一个
+        |-最后一个----判断最后一个时候是否查看过答案
+                    |-----是否加入到单词本，都需要执行原有的完成逻辑，即弹出辛苦了，退出该页面
+                    |-----没看过答案直接执行原有退出该界面的逻辑
+        |-非最后一个---realNextActionWithType仅影响动画效果
+     */
     if ([self.nextButton.titleLabel.text isEqualToString:@"结束"]) {
-        //结束
-        ///////plist文件的归档
-        NSString *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-        NSString *filePath = [path stringByAppendingPathComponent:@"forgetWords.plist"];
-        [self.forgetArray writeToFile:filePath atomically:YES];
-        ///////plist文件的归档
-        
-        UIAlertController *doneAlart = [UIAlertController alertControllerWithTitle:@"辛苦啦" message:@"测试完成，休息一下吧" preferredStyle:(UIAlertControllerStyleAlert)];
-        UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-            [self dismissViewControllerAnimated:YES completion:nil];
-        }];
-        [doneAlart addAction:sureAction];
-        [self presentViewController:doneAlart animated:YES completion:nil];
+        /*
+         bug - 最后一张卡片不会询问是否添加到单词本
+         fix - 在原有结束前加入提示框是否加入单词本
+         */
+        if (self.didForget == YES) {
+            //如果有过翻牌
+            UIAlertController *tipController = [UIAlertController alertControllerWithTitle:nil message:@"是否加入单词本" preferredStyle:(UIAlertControllerStyleAlert)];
+            UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                //加入存放忘记的数组，最后统一归档
+                [self.forgetArray addObject:self.lastString];
+                [self EndTestAndDisappearAction];
+            }];
+            UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleCancel) handler:^(UIAlertAction * _Nonnull action) {
+                //取消后
+                [self EndTestAndDisappearAction];
+            }];
+            [tipController addAction:sureAction];
+            [tipController addAction:cancleAction];
+            [self presentViewController:tipController animated:YES completion:^{
+                //什么都不做就好了
+            }];
+        }else{
+            //原有的结束流程
+            [self EndTestAndDisappearAction];
+        }
         
     }else{
         if (self.didForget == YES) {
@@ -379,6 +393,23 @@
     if (self.remainNumber == self.maxNumber) {
         [self.nextButton setTitle:@"结束" forState:(UIControlStateNormal)];
     }
+}
+
+#pragma mark - 原有结束的逻辑
+-(void)EndTestAndDisappearAction{
+    //原有结束
+    ////////////plist文件的归档////////////
+    NSString *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+    NSString *filePath = [path stringByAppendingPathComponent:@"forgetWords.plist"];
+    [self.forgetArray writeToFile:filePath atomically:YES];
+    ////////////plist文件的归档////////////
+    
+    UIAlertController *doneAlart = [UIAlertController alertControllerWithTitle:@"辛苦啦" message:@"测试完成，休息一下吧" preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }];
+    [doneAlart addAction:sureAction];
+    [self presentViewController:doneAlart animated:YES completion:nil];
 }
 
 @end

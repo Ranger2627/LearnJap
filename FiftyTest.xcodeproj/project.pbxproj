@@ -383,14 +383,14 @@
 				DEVELOPMENT_TEAM = C4YSB2AYP2;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/FiftyTest/define/PrefixHeader.pch";
 				INFOPLIST_FILE = FiftyTest/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Jack.FiftyTestInJackAccount;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -402,14 +402,14 @@
 				DEVELOPMENT_TEAM = C4YSB2AYP2;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/FiftyTest/define/PrefixHeader.pch";
 				INFOPLIST_FILE = FiftyTest/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Jack.FiftyTestInJackAccount;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

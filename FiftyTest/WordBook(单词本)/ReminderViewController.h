@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface ReminderViewController : UIViewController
-@property(copy,nonatomic)NSArray *wordArray;
+@property(strong,nonatomic)NSMutableArray *wordArray;
 @end

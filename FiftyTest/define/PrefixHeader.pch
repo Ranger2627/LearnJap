@@ -14,6 +14,20 @@
 
 #define NavHeight [UIApplication sharedApplication].statusBarFrame.size.height + 44
 #define isIphoneX [UIApplication sharedApplication].statusBarFrame.size.height > 20 ? YES : NO
+
+/*
+ 下面五行是处理屏幕单位的逻辑
+ 使用方法 100 * (screenScale) 就可以了
+ 目前已经适配的机型
+    *iphoneX一代～iPhone5
+    *iPad Pro 12.9 以及之前的机型
+ */
+#define isiPad [[UIDevice currentDevice].model isEqualToString:@"iPad"] ? YES : NO
+#define padPro ([UIScreen mainScreen].bounds.size.width == 1024)
+#define padScale (padPro) ? 1 : (Main_Width/768.0)
+#define iphoneScale Main_Width/375.0
+#define screenScale (isiPad) ? (padScale) : iphoneScale
+
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 
